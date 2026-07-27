@@ -1,11 +1,11 @@
 {
-  "name": "KIXEL — Player Development Intelligence",
-  "short_name": "KIXEL",
-  "description": "Every player in the picture. Real-time development intelligence for grassroots football.",
-  "start_url": "./?access=parent&v=kixel2",
+  "name": "LVFC Player Development — Powered by KIXEL",
+  "short_name": "LVFC Development",
+  "description": "The LVFC player development platform powered by KIXEL. Every player in the picture.",
+  "start_url": "./?access=parent&v=lvfc-kixel1",
   "scope": "./",
   "display": "standalone",
   "background_color": "#111710",
-  "theme_color": "#C6FF1A",
-  "icons": [{"src":"./kixel-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "theme_color": "#971234",
+  "icons": [{"src":"./lvfc-kixel-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
