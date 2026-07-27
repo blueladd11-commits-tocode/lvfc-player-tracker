@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#971234">
+<title>LVFC Player Development Tracker</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f3ef}iframe{display:block;width:100%;height:100%;border:0;background:#f7f3ef}
+</style>
+</head>
+<body>
+<iframe id="appFrame" title="LVFC Player Development Tracker"></iframe>
+<script>
+const frame=document.getElementById('appFrame');
+const query=new URLSearchParams(location.search);
+const access=['parent','coach','master'].includes(query.get('access'))?query.get('access'):'parent';
+frame.src=`./index.html?access=${encodeURIComponent(access)}&shell=v7`;
+frame.addEventListener('load',()=>{
+  const doc=frame.contentDocument;
+  if(!doc||doc.querySelector('script[data-v7-loader]'))return;
+  const script=doc.createElement('script');
+  script.src='./v7.js?v=7';
+  script.dataset.v7Loader='true';
+  doc.body.appendChild(script);
+});
+</script>
+</body>
+</html>
