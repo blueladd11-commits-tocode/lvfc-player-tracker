@@ -1,1 +1,13 @@
-{"name":"LVFC Player Development Tracker","short_name":"LVFC Tracker","start_url":"./","display":"standalone","background_color":"#f7f3ef","theme_color":"#8f1032","description":"Mobile-first touch counter and player development tracker for LVFC."}
+{
+  "name": "LVFC Player Development Tracker",
+  "short_name": "LVFC Tracker",
+  "description": "LVFC player touch tracking and session intelligence.",
+  "start_url": "./?access=parent&v=6",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f3ef",
+  "theme_color": "#971234",
+  "icons": [
+    {"src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
