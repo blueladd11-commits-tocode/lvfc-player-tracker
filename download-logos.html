@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LVFC & KIXEL Logo Downloads</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#080a08;color:#f5f6ec;font-family:Arial,Helvetica,sans-serif;min-height:100vh;padding:32px 18px}.wrap{width:min(920px,100%);margin:auto}h1{font-size:clamp(30px,6vw,58px);margin:0 0 8px}p{color:#b8beb5;margin:0 0 28px}.grid{display:grid;gap:20px}.card{background:#111710;border:1px solid #283126;border-radius:20px;padding:20px}.preview{height:240px;border-radius:14px;background:#000;display:flex;align-items:center;justify-content:center;padding:25px;overflow:hidden}.preview.light{background:#971234}.preview img{display:block;max-width:100%;max-height:100%;object-fit:contain}.title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0 12px}.title h2{margin:0;font-size:22px}.badge{font-size:10px;letter-spacing:.13em;font-weight:900;color:#c6ff1a}.buttons{display:flex;flex-wrap:wrap;gap:10px}button,a.button{appearance:none;border:0;border-radius:12px;padding:13px 16px;background:#c6ff1a;color:#111710;font-weight:900;cursor:pointer;text-decoration:none;font-size:14px}.secondary{background:#f5f6ec!important}.status{min-height:20px;color:#45cfff;margin-top:10px;font-size:13px}@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}.preview{height:280px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Official logo downloads</h1>
+<p>Use the buttons below. Your browser will generate and download a proper PNG file.</p>
+<section class="grid">
+<article class="card">
+<div class="preview"><img id="kixelPreview" src="./kixel-logo.svg?v=download1" alt="KIXEL logo"></div>
+<div class="title"><h2>KIXEL</h2><span class="badge">TECHNOLOGY BRAND</span></div>
+<div class="buttons"><button data-svg="./kixel-logo.svg?v=download1" data-name="KIXEL_Logo.png" data-width="1600">Download KIXEL PNG</button><a class="button secondary" href="./kixel-logo.svg?v=download1" download="KIXEL_Logo.svg">Download SVG</a></div>
+<div class="status" id="kixelStatus"></div>
+</article>
+<article class="card">
+<div class="preview light"><img id="lvfcPreview" src="./lvfc-logo-white.svg?v=download1" alt="LVFC logo"></div>
+<div class="title"><h2>LVFC</h2><span class="badge">CLUB BRAND</span></div>
+<div class="buttons"><button data-svg="./lvfc-logo-white.svg?v=download1" data-name="LVFC_Logo.png" data-width="1800">Download LVFC PNG</button><a class="button secondary" href="./lvfc-logo-white.svg?v=download1" download="LVFC_Logo.svg">Download SVG</a></div>
+<div class="status" id="lvfcStatus"></div>
+</article>
+</section>
+</main>
+<script>
+async function downloadPng(button){
+ const status=button.closest('.card').querySelector('.status');
+ status.textContent='Preparing PNG…'; button.disabled=true;
+ try{
+  const response=await fetch(button.dataset.svg,{cache:'no-store'});
+  if(!response.ok) throw new Error('Could not load logo');
+  const svgText=await response.text();
+  const parser=new DOMParser();
+  const svgDoc=parser.parseFromString(svgText,'image/svg+xml');
+  const svg=svgDoc.documentElement;
+  const viewBox=(svg.getAttribute('viewBox')||'0 0 1600 600').split(/\s+/).map(Number);
+  const ratio=viewBox[3]/viewBox[2];
+  const width=Number(button.dataset.width)||1600;
+  const height=Math.round(width*ratio);
+  const blob=new Blob([svgText],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  const image=new Image();
+  await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src=url});
+  const canvas=document.createElement('canvas'); canvas.width=width; canvas.height=height;
+  const context=canvas.getContext('2d'); context.clearRect(0,0,width,height); context.drawImage(image,0,0,width,height);
+  URL.revokeObjectURL(url);
+  const png=await new Promise(resolve=>canvas.toBlob(resolve,'image/png',1));
+  if(!png) throw new Error('PNG conversion failed');
+  const pngUrl=URL.createObjectURL(png);
+  const link=document.createElement('a'); link.href=pngUrl; link.download=button.dataset.name; document.body.appendChild(link); link.click(); link.remove();
+  setTimeout(()=>URL.revokeObjectURL(pngUrl),1500);
+  status.textContent='Downloaded successfully.';
+ }catch(error){status.textContent='Download failed: '+error.message;}
+ finally{button.disabled=false;}
+}
+document.addEventListener('click',event=>{const button=event.target.closest('button[data-svg]');if(button)downloadPng(button)});
+</script>
+</body>
+</html>
