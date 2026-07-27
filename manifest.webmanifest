@@ -1,13 +1,11 @@
 {
-  "name": "LVFC Player Development Tracker",
-  "short_name": "LVFC Tracker",
-  "description": "LVFC player touch tracking and session intelligence.",
-  "start_url": "./?access=parent&v=6",
+  "name": "KIXEL — Player Development Intelligence",
+  "short_name": "KIXEL",
+  "description": "Every player in the picture. Real-time development intelligence for grassroots football.",
+  "start_url": "./?access=parent&v=kixel2",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f3ef",
-  "theme_color": "#971234",
-  "icons": [
-    {"src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
-  ]
+  "background_color": "#111710",
+  "theme_color": "#C6FF1A",
+  "icons": [{"src":"./kixel-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
 }
