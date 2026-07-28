@@ -1,4 +1,4 @@
-import './kixel-app-v4.js?v=png-logos-20260728';
+import './kixel-app-v4.js?v=uploaded-logos1';
 import { getApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js';
 import {
@@ -55,12 +55,12 @@ function clubLockup(compact = false) {
   return `
     <div class="clubBrand ${compact ? 'compact' : ''}">
       <span class="lvfcPrimary">
-        <img src="./lvfc-logo.png?v=png-logos-20260728" alt="Lahore Virgil Football Club">
+        <img src="./lvfc-logo.png?v=uploaded-logos1" alt="Lahore Virgil Football Club">
         <small>PLAYER DEVELOPMENT</small>
       </span>
       <span class="poweredBy">
         <small>POWERED BY</small>
-        <img src="./kixel-logo.png?v=png-logos-20260728" alt="KIXEL">
+        <img src="./kixel-logo.png?v=uploaded-logos1" alt="KIXEL">
       </span>
     </div>`;
 }
