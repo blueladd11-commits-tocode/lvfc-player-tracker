@@ -1,5 +1,5 @@
-const CACHE='lvfc-kixel-png-logos-20260728';
-const ASSETS=['./','./index.html?v=png-logos-20260728','./manifest.webmanifest?v=png-logos-20260728','./firebase-styles-v1.css?v=png-logos-20260728','./kixel-brand.css?v=png-logos-20260728','./kixel-logo-fix.css?v=png-logos-20260728','./lvfc-kixel-app-v5.js?v=png-logos-20260728','./kixel-app-v4.js?v=png-logos-20260728','./lvfc-logo.png?v=png-logos-20260728','./kixel-logo.png?v=png-logos-20260728'];
+const CACHE='lvfc-kixel-uploaded-logos1';
+const ASSETS=['./','./index.html?v=uploaded-logos1','./manifest.webmanifest?v=uploaded-logos1','./firebase-styles-v1.css?v=uploaded-logos1','./kixel-brand.css?v=uploaded-logos1','./kixel-logo-fix.css?v=uploaded-logos1','./lvfc-kixel-app-v5.js?v=uploaded-logos1','./kixel-app-v4.js?v=uploaded-logos1','./logo-path-fix.js?v=uploaded-logos1','./lvfc-logo.png?v=uploaded-logos1','./kixel-logo.png?v=uploaded-logos1'];
 self.addEventListener('install',event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)))});
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;event.respondWith(fetch(event.request).then(response=>{if(response&&response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy))}return response}).catch(()=>caches.match(event.request)))});
