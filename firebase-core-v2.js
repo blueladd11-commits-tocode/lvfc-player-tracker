@@ -26,7 +26,7 @@ export const state = {
 };
 
 export const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-export const logoWhite=()=>'<img class="logo" src="./lvfc-logo-white.svg?v=8" alt="LVFC">';
+export const logoWhite=()=>'<img class="logo" src="./lvfc-logo.png?v=uploaded-logos1" alt="LVFC">';
 export const logoBadge=()=>`<span class="logoBadge">${logoWhite()}</span>`;
 export const tsDate=v=>v?.toDate?v.toDate():v instanceof Date?v:new Date(v||Date.now());
 export const fmtDate=v=>tsDate(v).toLocaleDateString('en-GB',{timeZone:PK_ZONE,day:'numeric',month:'short',year:'numeric'});
