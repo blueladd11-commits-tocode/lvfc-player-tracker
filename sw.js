@@ -1,5 +1,16 @@
-const CACHE='lvfc-kixel-uploaded-logos1';
-const ASSETS=['./','./index.html?v=uploaded-logos1','./manifest.webmanifest?v=uploaded-logos1','./firebase-styles-v1.css?v=uploaded-logos1','./kixel-brand.css?v=uploaded-logos1','./kixel-logo-fix.css?v=uploaded-logos1','./lvfc-kixel-app-v5.js?v=uploaded-logos1','./kixel-app-v4.js?v=uploaded-logos1','./logo-path-fix.js?v=uploaded-logos1','./lvfc-logo.png?v=uploaded-logos1','./kixel-logo.png?v=uploaded-logos1'];
-self.addEventListener('install',event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)))});
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;event.respondWith(fetch(event.request).then(response=>{if(response&&response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy))}return response}).catch(()=>caches.match(event.request)))});
+// Recovery worker: remove every legacy cache and retire service-worker control.
+// The app is network-loaded so deployments cannot be trapped behind stale shells.
+self.addEventListener('install', event => {
+  self.skipWaiting();
+});
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(key => caches.delete(key)));
+    await self.clients.claim();
+    await self.registration.unregister();
+  })());
+});
+self.addEventListener('fetch', () => {
+  // Intentionally no interception.
+});
