@@ -1,0 +1,1 @@
+Real PNG assets are being added through the Git data API.
