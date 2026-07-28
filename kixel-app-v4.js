@@ -31,7 +31,7 @@ import { firebaseConfig } from './firebase-config.js';
 const firebase = initializeApp(firebaseConfig);
 const auth = getAuth(firebase);
 const db = getFirestore(firebase);
-await setPersistence(auth, browserLocalPersistence);
+setPersistence(auth, browserLocalPersistence).catch(error => console.warn('Firebase persistence unavailable; continuing with session auth.', error));
 
 const app = document.querySelector('#app');
 const params = new URLSearchParams(location.search);
@@ -438,4 +438,4 @@ document.addEventListener('submit',async event=>{
 
 onAuthStateChanged(auth,user=>refreshAuthContext(user).catch(error=>{uiMessage=`Error: ${error.message}`;render();}));
 setInterval(()=>{if(access==='coach'&&currentProfile?.role==='coach')ensureScheduledSession().catch(()=>{});},30000);
-if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=uploaded-logos1'));
+
