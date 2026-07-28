@@ -436,6 +436,6 @@ document.addEventListener('submit',async event=>{
   } catch (error) { uiMessage=`Error: ${error.message}`;render(); }
 });
 
-onAuthStateChanged(auth,user=>refreshAuthContext(user).catch(error=>{uiMessage=`Error: ${error.message}`;render();}));
+render();\nonAuthStateChanged(auth,user=>refreshAuthContext(user).catch(error=>{uiMessage=`Error: ${error.message}`;render();}));
 setInterval(()=>{if(access==='coach'&&currentProfile?.role==='coach')ensureScheduledSession().catch(()=>{});},30000);
 
