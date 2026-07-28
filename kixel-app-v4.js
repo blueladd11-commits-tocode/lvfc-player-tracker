@@ -72,6 +72,13 @@ function clearSubscriptions() {
 function track(unsubscribe) { unsubscribers.add(unsubscribe); return unsubscribe; }
 function escapeHtml(value='') { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function timestampToDate(value) { return value?.toDate ? value.toDate() : value ? new Date(value) : null; }
+function isSessionOpenNow(session) {
+  if (!session || session.status !== 'live') return false;
+  const startsAt = timestampToDate(session.startsAt);
+  const endsAt = timestampToDate(session.endsAt);
+  const now = Date.now();
+  return Boolean(startsAt && endsAt && now >= startsAt.getTime() && now < endsAt.getTime());
+}
 function fmtDate(value) { const date = timestampToDate(value); return date ? date.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—'; }
 function fmtTime(value) { const date = timestampToDate(value); return date ? date.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) : '—'; }
 function totalTouches(stats=liveStats) { return stats.reduce((sum,item)=>sum+Number(item.touches||0),0); }
@@ -142,7 +149,7 @@ async function setupParent() {
   track(onSnapshot(sessionsQuery,snapshot=>{
     sessions=snapshot.docs.map(item=>({id:item.id,...item.data()}));
     sessions.sort((a,b)=>(timestampToDate(b.endedAt||b.startsAt)||0)-(timestampToDate(a.endedAt||a.startsAt)||0));
-    liveSession=sessions.find(session=>session.status==='live')||null;
+    liveSession=sessions.find(isSessionOpenNow)||null;
     subscribeParentStats();
     loadParentHistoryStats().catch(error=>{uiMessage=`Error: ${error.message}`;render();});
     render();
@@ -186,7 +193,7 @@ async function setupStaff(requiredRole) {
   const sessionsQuery=query(collection(db,'sessions'),orderBy('startsAt','desc'),limit(60));
   track(onSnapshot(sessionsQuery,snapshot=>{
     sessions=snapshot.docs.map(item=>({id:item.id,...item.data()}));
-    liveSession=sessions.find(session=>session.status==='live')||null;
+    liveSession=sessions.find(isSessionOpenNow)||null;
     subscribeLiveStats();
     loadSessionFacts().catch(error=>{uiMessage=`Error: ${error.message}`;render();});
     if (requiredRole==='coach') ensureScheduledSession().catch(error=>{uiMessage=`Error: ${error.message}`;render();});
