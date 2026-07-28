@@ -2,10 +2,17 @@
   "name": "LVFC Player Development — Powered by KIXEL",
   "short_name": "LVFC Development",
   "description": "The official LVFC player development experience powered by KIXEL technology.",
-  "start_url": "./?access=parent&v=lvfc-kixel2",
+  "start_url": "./?access=parent&v=png-logos-20260728",
   "scope": "./",
   "display": "standalone",
   "background_color": "#111710",
   "theme_color": "#971234",
-  "icons": [{"src":"./lvfc-kixel-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "icons": [
+    {
+      "src": "./lvfc-logo.png?v=png-logos-20260728",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
