@@ -70,7 +70,7 @@ function clearSubscriptions() {
   unsubscribers.clear();
 }
 function track(unsub) { unsubscribers.add(unsub); return unsub; }
-function logoWhite() { return '<img class="logo" src="./lvfc-logo-white.svg?v=firebase1" alt="LVFC">'; }
+function logoWhite() { return '<img class="logo" src="./lvfc-logo.png?v=png-logos-20260728" alt="LVFC">'; }
 function logoCrimson() { return `<span class="logoBadge">${logoWhite()}</span>`; }
 function escapeHtml(value='') { return String(value).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function timestampToDate(value) { return value?.toDate ? value.toDate() : value ? new Date(value) : null; }
