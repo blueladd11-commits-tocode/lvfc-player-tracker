@@ -78,7 +78,7 @@ function totalTouches(stats=liveStats) { return stats.reduce((sum,item)=>sum+Num
 function averageTouches(stats=liveStats) { return Math.round(totalTouches(stats)/Math.max(1,stats.length)); }
 function activePlayers() { return liveStats.length || liveSession?.activeIds?.length || 0; }
 function brandLockup(compact=false) {
-  return `<div class="brandLockup ${compact?'compact':''}"><span class="kixelPlate"><img class="kixelLogo" src="./kixel-logo.svg?v=4" alt="KIXEL"></span><span class="bornAt">BORN AT <img src="./lvfc-logo-white.svg?v=4" alt="LVFC"></span></div>`;
+  return `<div class="brandLockup ${compact?'compact':''}"><span class="kixelPlate"><img class="kixelLogo" src="./kixel-logo.png?v=png-logos-20260728" alt="KIXEL"></span><span class="bornAt">BORN AT <img src="./lvfc-logo.png?v=png-logos-20260728" alt="LVFC"></span></div>`;
 }
 function signOutButton() { return '<button class="iconBtn" data-action="logout" aria-label="Sign out">↗</button>'; }
 function pkParts(date = new Date()) {
@@ -438,4 +438,4 @@ document.addEventListener('submit',async event=>{
 
 onAuthStateChanged(auth,user=>refreshAuthContext(user).catch(error=>{uiMessage=`Error: ${error.message}`;render();}));
 setInterval(()=>{if(access==='coach'&&currentProfile?.role==='coach')ensureScheduledSession().catch(()=>{});},30000);
-if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=kixel4'));
+if ('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=png-logos-20260728'));
