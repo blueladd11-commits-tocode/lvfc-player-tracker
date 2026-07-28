@@ -1,6 +1,6 @@
 (() => {
-  const LVFC_LOGO = './lvfc-logo.png?v=official-png2';
-  const KIXEL_LOGO = './kixel-logo.png?v=official-png2';
+  const LVFC_LOGO = './lvfc-logo.png?v=uploaded-logos1';
+  const KIXEL_LOGO = './kixel-logo.png?v=uploaded-logos1';
 
   function setLogo(image, source) {
     if (!image || image.getAttribute('src') === source) return;
